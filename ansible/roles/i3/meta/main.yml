@@ -1,0 +1,11 @@
+galaxy_info:
+  role_name: i3
+  author: martinhinnerson
+  description: Ansible role for installation of i3
+  license: MIT
+
+  min_ansible_verison: 2.1
+
+  galaxy_tags: []
+
+dependencies: []

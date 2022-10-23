@@ -1,0 +1,25 @@
+- name: Create user | user
+  become: true
+  user:
+    name: "{{ username }}"
+    create_home: true
+    group: users
+    groups:
+      - wheel
+  when: create_user | bool
+
+- name: Create scripts directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/bin
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Bootstrap dotfiles | raw
+  raw: 'sh {{ playbook_dir }}/../dotfiles/install.sh'
+  when: install_dotfiles | bool
+
+- name: Add ansible community packages
+  raw: "ansible-galaxy collection install community.general"

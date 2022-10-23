@@ -1,0 +1,16 @@
+- name: Check if luarocks is installed | shell
+  shell: command -v luarocks
+  register: luarocks_exist
+  ignore_errors: yes
+
+- name: Install luarocks | shell
+  when: luarocks_exist is failed
+  shell: |
+    pushd /tmp
+    wget https://luarocks.org/releases/luarocks-3.9.1.tar.gz
+    tar zxpf luarocks-3.9.1.tar.gz
+    cd luarocks-3.9.1
+    ./configure && make && sudo make install
+    sudo luarocks install luasocket
+    popd
+  tags: lua

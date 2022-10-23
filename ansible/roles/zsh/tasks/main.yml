@@ -1,0 +1,32 @@
+- name: Installs zsh | pacman
+  become: true
+  pacman:
+    name: zsh
+    state: present
+
+- name: Installs curl | pacman
+  become: true
+  pacman:
+    name: curl
+    state: present
+
+- name: Sets zsh as default shell for my user | command
+  become: true
+  command: chsh -s /bin/zsh {{ lookup('env', 'USER') }}
+  register: zsh_for_user
+  failed_when: zsh_for_user.rc >= 1
+  changed_when: zsh_for_user.rc == 0
+
+- name: Checks for oh-my-zsh installation | stat
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+  register: oh_my_zsh_stat
+
+- name: Installs oh-my-zsh | raw
+  raw: 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  when: not oh_my_zsh_stat
+
+- name: Installs powerlevel10k | raw
+  raw: 'git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k'
+  when: not oh_my_zsh_stat
+

@@ -1,0 +1,7 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot.git
+	ignore = dirty
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:Martinhinnerson/dotfiles.git

@@ -1,0 +1,14 @@
+- name: Check if node is installed | shell
+  shell: command -v fnm
+  register: node_exists
+  ignore_errors: yes
+
+- name: Install fnm | raw
+  when: node_exists is failed
+  raw: "curl -fsSL https://fnm.vercel.app/install | zsh"
+  tags: node
+
+- name: Install node | raw
+  when: node_exists is failed
+  raw: "pushd ~ && fnm install && fnm use && popd"
+  tags: node

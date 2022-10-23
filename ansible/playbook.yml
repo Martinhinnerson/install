@@ -1,0 +1,13 @@
+- name: Set up local workstation
+  hosts: local
+  roles:
+    - role: user
+    - role: utils
+    - role: zsh
+    - role: i3
+    - role: python
+    - role: node
+    - role: rust
+    - role: lua
+  vars_files:
+    - vars/global.yml

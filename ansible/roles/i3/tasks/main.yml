@@ -1,0 +1,55 @@
+- name: Include vars
+  include_vars: main.yml
+
+- name: Install packages | pacman
+  become: true
+  pacman:
+    name: "{{ i3_packages }}"
+    state: "{{ i3_packages_state | default('present') }}"
+  tags:
+    - install
+
+- name: Configure Monitor | replace
+  replace:
+    path: ~/.config/i3/config
+    regexp: '(\s+)tray_output primary(\s+.*)?$'
+    replace: "\n    tray_output {{ i3_screen_output }}\n" #TODO: Fix this
+
+- name: Remove titlebar and meny from gnome terminal \ shell
+  become: no
+  shell:
+    cmd: "gsettings {{ item }}"
+  with_items:
+    - set org.gnome.Terminal.Legacy.Settings headerbar false
+    - set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+
+- name: Enable picom | blockinfile
+  blockinfile:
+    dest: ~/.config/i3/config
+    insertafter: '^(.*)#ANSIBLE(.*)$'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK PICOM"
+    block: |
+      # Run Picom at startup
+      exec --no-startup-id picom --no-vsync --fade-delta={{ picom_fade_delta }}
+
+- name: Enable nitrogen | blockinfile
+  blockinfile:
+    dest: ~/.config/i3/config
+    insertbefore: '^(.*)#ANSIBLE(.*)$'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK NITROGEN"
+    block: |
+      # Run Nitrogen at startup
+      exec --no-startup-id nitrogen --restore
+
+- block:
+  - name: Fetch wallpapers
+    git:
+      repo: "{{ i3_wallpaper }}"
+      dest: ~/Pictures/i3_wallpapers
+    when: install_wallpaper | bool
+
+- include: polybar.yml
+  when: install_polybar | bool
+
+- include: i3lock.yml
+  when: install_i3lock | bool

@@ -1,0 +1,14 @@
+- name: Include vars
+  include_vars: main.yml 
+
+- name: Install python | pacman
+  become: true
+  pacman:
+    name:
+      - python
+      - python-pip
+      - python-virtualenv
+
+- name: Install python packages | pip
+  pip:
+    name: "{{ python_packages }}"

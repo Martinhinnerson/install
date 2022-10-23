@@ -1,0 +1,23 @@
+- name: Install i3lock | pacman
+  become: true
+  pacman:
+    name:
+      - i3lock
+      - xautolock
+
+- name: Fetch i3lock-fancy-rapid | git
+  git:
+    repo: 'https://github.com/yvbbrjdr/i3lock-fancy-rapid'
+    dest: /tmp/i3lock-fancy-rapid
+
+- name: Install i3lock-fancy-rapid | raw
+  raw: 'pushd /tmp/i3lock-fancy-rapid && make && cp i3lock-fancy-rapid $HOME/bin/ && popd'
+  
+- name: Enable autolock in i3 config | blockinfile
+  blockinfile:
+    dest: ~/.config/i3/config
+    insertafter: '^(.*)#ANSIBLE(.*)$'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK AUTOLOCK"
+    block: |
+      exec --no-startup-id xautolock -detectsleep -time 3 -locker "i3lock-fancy-rapid {{ i3lock_blur_radius }} {{ i3lock_blur_times }}"
+      bindsym Control+Mod1+l exec "i3lock-fancy-rapid {{ i3lock_blur_radius }} {{ i3lock_blur_times }}"
