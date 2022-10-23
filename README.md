@@ -21,32 +21,32 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<!-- [![Issues][issues-shield]][issues-url] -->
+<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 
 
 <!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/martinhinnerson/arch-post-install">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+<!-- <br /> -->
+<!-- <div align="center"> -->
+<!--   <a href="https://github.com/martinhinnerson/install"> -->
+<!--     <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
+<!--   </a> -->
 
-<h3 align="center">Arch Post Installation</h3>
+<h3 align="center">Unix Post Installation</h3>
 
   <p align="center">
     Post installation setup for Arch linux. Installers for programs and bootstrapping of dotfiles.
     <br />
-    <a href="https://github.com/martinhinnerson/arch-post-install"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/martinhinnerson/install"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/martinhinnerson/arch-post-install">View Demo</a>
-    ·
-    <a href="https://github.com/martinhinnerson/arch-post-install/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/martinhinnerson/arch-post-install/issues">Request Feature</a>
+    <!-- <a href="https://github.com/martinhinnerson/install">View Demo</a> -->
+    <!-- · -->
+    <!-- <a href="https://github.com/martinhinnerson/install/issues">Report Bug</a> -->
+    <!-- · -->
+    <!-- <a href="https://github.com/martinhinnerson/install/issues">Request Feature</a> -->
   </p>
 </div>
 
@@ -70,8 +70,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
+    <!-- <li><a href="#contributing">Contributing</a></li> -->
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -83,19 +83,19 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 This repo does all the post-installation setup after a fresh installation of linux.
 
-[Ansible](www.ansible.com) is used for program installation and [dotbot](https://github.com/anishathalye/dotbot) is used for bootstrapping of dotfiles.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 ### Built With
 
-* [![Ansible][ansible]][https://www.ansible.com]
-* [![Dotbot][dotbot]][https://github.com/ansihathalve/dotbot]
+* [Ansible](https://www.ansible.com)
+* [Dotbot](https://github.com/ansihathalve/dotbot)
+* [Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,21 +104,19 @@ This repo does all the post-installation setup after a fresh installation of lin
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-There is no prerequisites to run this. The <a href="https://github.com/martinhinnerson/arch-post-install/install.sh">install.sh</a> script will install ansible and run the playbook.
+There is no prerequisites to run this. The <a href="https://github.com/martinhinnerson/install/install.sh">install.sh</a> script will install ansible and run the playbook.
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/martinhinnerson/arch-post-install.git
+   git clone https://github.com/martinhinnerson/install.git
    ```
 2. Run the installer
    ```sh
+   cd install
    ./install.sh
    ```
 4. Enter your user password when asked for it.
@@ -129,44 +127,42 @@ There is no prerequisites to run this. The <a href="https://github.com/martinhin
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+Configuration can be done by modifying the <a href="https://github.com/martinhinnerson/install/ansible/vars/global.yml">global variables</a> in the ansible playbook.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/martinhinnerson/arch-post-install/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<!-- ## Roadmap -->
+<!---->
+<!-- - [ ] Feature 1 -->
+<!-- - [ ] Feature 2 -->
+<!-- - [ ] Feature 3 -->
+<!--     - [ ] Nested Feature -->
+<!---->
+<!-- See the [open issues](https://github.com/martinhinnerson/install/issues) for a full list of proposed features (and known issues). -->
+<!---->
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<!---->
 
 
 <!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<!-- ## Contributing -->
+<!---->
+<!-- Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. -->
+<!---->
+<!-- If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". -->
+<!-- Don't forget to give the project a star! Thanks again! -->
+<!---->
+<!-- 1. Fork the Project -->
+<!-- 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`) -->
+<!-- 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`) -->
+<!-- 4. Push to the Branch (`git push origin feature/AmazingFeature`) -->
+<!-- 5. Open a Pull Request -->
+<!---->
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<!---->
 
 
 <!-- LICENSE -->
@@ -181,9 +177,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+<!-- Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
 
-Project Link: [https://github.com/martinhinnerson/arch-post-install](https://github.com/martinhinnerson/arch-post-install)
+Project Link: [https://github.com/martinhinnerson/install](https://github.com/martinhinnerson/install)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -192,26 +188,24 @@ Project Link: [https://github.com/martinhinnerson/arch-post-install](https://git
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [Dotbot](https://github.com/ansihathalve/dotbot)
+* [Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/martinhinnerson/arch-post-install.svg?style=for-the-badge
-[contributors-url]: https://github.com/martinhinnerson/arch-post-install/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/martinhinnerson/arch-post-install.svg?style=for-the-badge
-[forks-url]: https://github.com/martinhinnerson/arch-post-install/network/members
-[stars-shield]: https://img.shields.io/github/stars/martinhinnerson/arch-post-install.svg?style=for-the-badge
-[stars-url]: https://github.com/martinhinnerson/arch-post-install/stargazers
-[issues-shield]: https://img.shields.io/github/issues/martinhinnerson/arch-post-install.svg?style=for-the-badge
-[issues-url]: https://github.com/martinhinnerson/arch-post-install/issues
-[license-shield]: https://img.shields.io/github/license/martinhinnerson/arch-post-install.svg?style=for-the-badge
-[license-url]: https://github.com/martinhinnerson/arch-post-install/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/martinhinnerson/install.svg?style=for-the-badge
+[contributors-url]: https://github.com/martinhinnerson/install/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/martinhinnerson/install.svg?style=for-the-badge
+[forks-url]: https://github.com/martinhinnerson/install/network/members
+[stars-shield]: https://img.shields.io/github/stars/martinhinnerson/install.svg?style=for-the-badge
+[stars-url]: https://github.com/martinhinnerson/install/stargazers
+[issues-shield]: https://img.shields.io/github/issues/martinhinnerson/install.svg?style=for-the-badge
+[issues-url]: https://github.com/martinhinnerson/install/issues
+[license-shield]: https://img.shields.io/github/license/martinhinnerson/install.svg?style=for-the-badge
+[license-url]: https://github.com/martinhinnerson/install/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
