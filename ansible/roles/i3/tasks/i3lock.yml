@@ -19,5 +19,5 @@
     insertafter: '^(.*)#ANSIBLE(.*)$'
     marker: "# {mark} ANSIBLE MANAGED BLOCK AUTOLOCK"
     block: |
-      exec --no-startup-id xautolock -detectsleep -time 3 -locker "i3lock-fancy-rapid {{ i3lock_blur_radius }} {{ i3lock_blur_times }}"
-      bindsym Control+Mod1+l exec "i3lock-fancy-rapid {{ i3lock_blur_radius }} {{ i3lock_blur_times }}"
+      exec xautolock -detectsleep -time 3 -locker "~/bin/i3lock-fancy-rapid {{ i3lock_blur_radius }} {{ i3lock_blur_times }}"
+      bindsym $mod+Control+l exec "~/bin/i3lock-fancy-rapid {{ i3lock_blur_radius }} {{ i3lock_blur_times }}"
