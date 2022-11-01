@@ -30,7 +30,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK PICOM"
     block: |
       # Run Picom at startup
-      exec --no-startup-id picom --no-vsync --fade-delta={{ picom_fade_delta }}
+      exec --no-startup-id picom --config ~/.config/picom.conf/picom.conf
 
 - name: Enable nitrogen | blockinfile
   blockinfile:
