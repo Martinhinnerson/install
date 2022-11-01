@@ -9,7 +9,7 @@ i3_screen_output: Virtual1
 i3_screen_resolution: 1920x1080
 
 # Configure window manager
-picom_fade_delta: 4 # Window fade time
+picom_fade_delta: 1 # Window fade time
 i3lock_blur_radius: 5 # kernel radius of box blur
 i3lock_blur_times: 3 # number of times box blur is applied
 
