@@ -15,7 +15,7 @@
     regexp: '(\s+)tray_output primary(\s+.*)?$'
     replace: "\n    tray_output {{ i3_screen_output }}\n" #TODO: Fix this
 
-- name: Remove titlebar and meny from gnome terminal \ shell
+- name: Remove titlebar and meny from gnome terminal | shell
   become: no
   shell:
     cmd: "gsettings {{ item }}"

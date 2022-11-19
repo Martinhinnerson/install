@@ -1,0 +1,190 @@
+timezone: Europe/Stockholm
+lang: en_US.UTF-8
+encoding: UTF-8
+keymap: us 
+
+network_pkgs:
+  - networkmanager
+  - dhclient
+
+pacman_mirror:
+  - pacman-contrib
+  - curl
+  - reflector
+  - rsync
+
+base_pkgs:
+  - mesa                        # Essential Xorg First
+  - xorg                        # xorg base
+  - xorg-server                 # xorg base
+  - xorg-apps                   # xorg base
+  - xorg-drivers                # xorg base
+  - xorg-xkill                  # xorg base
+  - xorg-xinit                  # xorg base
+  - xterm                       # xorg base
+  - aria2                       # fast download utility
+  - autoconf                    # build
+  - automake                    # build
+  - base                        # essential
+  - base-devel                  # essential
+  - bash-completion             # essential
+  - bind                        # dns server
+  - binutils                    # gnu collection of utils
+  - bitwarden			# password manager
+  - bleachbit                   # os cleaner
+  - bridge-utils                # virtualization
+  - btrfs-progs                 # btrfs file support
+  - visual-studio-code-bin                        # Visual Studio code
+  - cronie                      # cron task server
+  - dbus                        # os's dbus
+  - dialog                      # dialog boxes for script
+  - discord                     # discord client
+  - dnsmasq                     # virtualization
+  # - dosfstools                  # fat32 file support
+  - efibootmgr                  # EFI boot
+  - feh                         # sets wallpaper
+  - flameshot                   # screenshot daemon
+  - fuse2                       # fuse
+  - fuse3                       # fuse
+  - fuseiso                     # fuse
+  - gamemode                    # gamemode utility (for boosting game performance)
+  - gcc                         # gcc compiler
+  - giflib                      # wine dependency
+  - git                         # git cli
+  - gnome-calculator            # powerful calculator
+  - gnome-keyring               # gnome's keyring
+  - gnu-free-fonts              # fonts
+  - gnutls                      # free implementation of tls, ssl and dtls protocols
+  - go                          # for compiling yay
+  - gtk3                        # gtk3 widget toolkit
+  - gsfonts                     # fonts
+  - gst-plugins-base            # gst base plugins
+  - gst-plugins-base-libs       # gst libs for base plugins
+  - gparted                     # partition management
+  - gptfdisk                    # gpt disk tool
+  - grub                        # grub bootloader
+  - grub-customizer             # app to customize grub
+  - gst-libav                   # gst libav
+  - gst-plugins-good            # gst plugins good
+  - gst-plugins-ugly            # gst plugins ugly
+  - gvfs                        # thunar trash support etc
+  - gvfs-mtp                    # mtp devices support in thunar
+  - inkscape                    # for compiling the cursor and useful for other themes
+  - kitty                       # terminal
+  - alacritty
+  - lib32-alsa-lib              # sound lib32
+  - lib32-alsa-plugins          # sound lib32
+  - lib32-libpng                # lib for png files
+  - lib32-libldap               # wine dependency
+  - lib32-giflib                # wine dependency
+  - lib32-gnutls                # gnutls lib32
+  - lib32-openal                # wine dependency
+  - lib32-v4l-utils             # lib32 for video related stuff
+  - lib32-libpulse              # sound lib32
+  - lib32-libgpg-error          # wine dependency
+  - lib32-libjpeg-turbo         # jpeg lib
+  - lib32-sqlite                # sqlite lib
+  - lib32-libxcomposite         # wine dependency
+  - lib32-libgcrypt             # wine dependency
+  - lib32-libxinerama           # wine dependency
+  - lib32-ncurses               # wine dependency
+  - lib32-mpg123                # wine dependency
+  - lib32-opencl-icd-loader     # wine dependency
+  - lib32-v4l-utils             # wine dependency
+  - lib32-libxslt               # wine dependency
+  - lib32-libva                 # wine dependency
+  - lib32-gtk3                  # gtk3 lib32
+  - lib32-gst-plugins-base-libs # gst plugins base libs
+  - lib32-vulkan-icd-loader     # wine dependency
+  - libjpeg-turbo               # wine dependency
+  - libdbusmenu-glib            # dbus lib
+  - libgpg-error                # wine dependency
+  - libldap                     # wine dependency
+  - libpng                      # png lib
+  - libpulse                    # sound lib
+  - libxcomposite               # wine dependency
+  - libxinerama                 # wine dependency
+  # - libguestfs                  # virtualization
+  - libva                       # wine dependency
+  - libgcrypt                   # wine dependency
+  - libxslt                     # wine dependency
+  - libnewt                     # system lib
+  - libtool                     # programming lib
+  - lightdm                     # lightweight display manager
+  - lightdm-webkit2-greeter     # greeter for lightdm
+  - linux-lts                   # linux lts kernel, just in case
+  - linux-lts-headers           # lts kernel headers
+  - linux-zen                   # linux zen kernel
+  - linux-firmware              # firmware filex for linux
+  - linux-zen-headers           # linux zen kernel headers
+  - linux-tkg-pds               # linux tkg kernel with pds cpu scheduler
+  - linux-tkg-pds-headers       # linux tkg kernel with pds cpu scheduler headers
+  - lutris                      # lutris client
+  - lxappearance                # configure os appearance
+  - lxsession                   # polkit authentification agent
+  - lzop                        # compression
+  - make                        # make util for building code
+  - milou                       # arm build system
+  - mpg123                      # wine dependency
+  - ncdu                        # console utils for viewing where all disk space goes
+  - ncurses                     # wine dependency
+  - noto-fonts                  # fonts
+  - neofetch                    # dispalys system info
+  - networkmanager              # network managment
+  - ntfs-3g                     # ntfs file support
+  - openssh                     # server ssh
+  - os-prober                   # scans for any other os (for grub boot)
+  - openal                      # wine dependency
+  - openbsd-netcat              # virtualizatoin
+  - opencl-icd-loader           # wine dependency
+  - p7zip                       # compression
+  - pacman-contrib              # essential
+  - papirus-icon-theme          # icons theme
+  - pavucontrol                 # audio panel
+  - postman                     # software for sending http requests
+  - powerline-fonts             # fonts
+  - qemu                        # virtualization
+  - rofi                        # window switcher
+  - rsync                       # sync files
+  - sdl_ttf                     # some sort of font lib
+  - speedtest-cli               # test network speed
+  - sqlite                      # sqlite binaries
+  - systemd                     # systemd, don't need to say more
+  - sudo                        # sudo, don't need to say more
+  - swtpm                       # tpm emulator
+  - sxhkd                       # x hotkey daemon (by bspwm devs)
+  - terminus-font               # font
+  - thunar                      # file manager (from xfce)
+  - traceroute                  # trace network route
+  - ttf-bitstream-vera          # font
+  - ttf-dejavu                  # font
+  - ttf-fira-code               # font
+  - ttf-font-awesome            # font
+  - ttf-hack                    # font
+  - ttf-liberation              # font
+  - ttf-roboto                  # font
+  - ttf-ubuntu-font-family      # font
+  - ufw                         # firewall
+  - unrar                       # compression
+  - unzip                       # compression
+  - usbutils                    # essential
+  - vim                         # essential
+  - v4l-utils                   # wine dependency
+  - vde2                        # virtualization
+  - virt-manager                # virtualization
+  - virt-viewer                 # virtualization
+  - vulkan-icd-loader           # wine dependency
+  - wget                        # wget, download's stuff from web
+  - which                       # util to show full paths of commands
+  - wine-gecko                  # wine related
+  - wine-mono                   # wine related
+  - winetricks                  # wine related
+  - xdg-user-dirs               # creates user dirs
+  - xf86-input-libinput         # input driver
+  - xfce4-settings              # settings app
+  - xorg-fonts-type1            # fon ts
+  - zip                         # compression
+  - zsh                         # zsh shell
+  - zsh-syntax-highlighting     # zsh systax highlightning
+  - zsh-autosuggestions         # zsh autosuggestion
+  - zenity                      # wine dependency

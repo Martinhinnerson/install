@@ -1,3 +1,6 @@
+- name: Include vars
+  include_vars: main.yml
+
 - name: Create user | user
   become: true
   user:
@@ -17,9 +20,163 @@
     group: users
     mode: 0755
 
-- name: Bootstrap dotfiles | raw
-  raw: 'sh {{ playbook_dir }}/../dotfiles/install.sh'
-  when: install_dotfiles | bool
+- name: Create Downloads directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/Downloads
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
 
-- name: Add ansible community packages
+- name: Create Templates directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/Templates
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Create Public directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/Public
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Create Downloads directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/Downloads
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Create Music directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/Music
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Create Pictures directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/Pictures
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Create Videos directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/Videos
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+# - name: Bootstrap dotfiles | raw
+#   raw: 'sh {{ playbook_dir }}/../dotfiles/install.sh'
+#   when: install_dotfiles | bool
+
+- name: Add ansible community packages | raw
   raw: "ansible-galaxy collection install community.general"
+
+- name: Install YAY | shell
+  shell: |
+    cd ~
+    git clone "https://aur.archlinux.org/yay.git"
+    cd ${HOME}/yay
+    makepkg -si --noconfirm
+
+- name: Install user_pkgs | pacman
+  tags:
+    - packages
+  become: true
+  pacman:
+    name: "{{ user_pkgs }}"
+
+- name: Install background | shell
+  shell: |
+    cp $HOME/ArchObscurely/background.jpg $HOME/Pictures/background.jpg
+    sudo ln -s "$HOME/Pictures/background.jpg" /usr/share/backgrounds/background.jpg
+  ignore_errors: true
+
+- name: Create .local directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/.local
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Create .local/share directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/.local/share
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Create .local/share/fonts directory | file
+  become: true
+  file: 
+    name: /home/{{ username }}/.local/share/fonts
+    state: directory
+    owner: "{{ username }}"
+    group: users
+    mode: 0755
+
+- name: Clone PolybarRofiFonts | git
+  git: 
+    repo: https://github.com/Obscurely/PolybarRofiFonts.git 
+    dest: /home/{{ username }}/.local/share/fonts
+
+- name: Scan new fonts | shell
+  shell: |
+    fc-cache
+    sleep 3
+
+- name: Install lightdm theme | pacman
+  tags:
+    - lightdm
+  become: true
+  pacman:
+    name:
+      - lightdm
+      - lightdm-pantheon-greeter
+      - libglib2.0-bin
+    state: present
+
+- name: Write LightDM configuration | template
+  tags:
+    - lightdm
+  become: true
+  template:
+    src: lightdm.conf.j2
+    dest: '{{ lightdm_conf_directory }}/{{ lightdm_overide_filename }}'
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  register: lightdm_config
+
+- name: Apply glib schemas changes | command
+  tags:
+    # Suppress warning: [ANSIBLE0016] Tasks that run when changed should likely be handlers
+    # Since the command is invoked with an argument that is role specific it
+    # doesn't make sense to use a handler, which are global to the playbook.
+    - skip_ansible_lint
+    - lightdm
+  become: yes
+  command: '/usr/bin/glib-compile-schemas {{ lightdm_glib_schemas_directory }}'
+  when: lightdm_config.changed

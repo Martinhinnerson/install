@@ -1,0 +1,124 @@
+- name: Include vars
+  include_vars: main.yml
+
+- name: Network Setup | pacman
+  tags:
+    - packages
+  become: true
+  pacman:
+    name: "{{ network_pkgs }}"
+
+- name: Enable NetworkManager | shell
+  become: true
+  shell: |
+    systemctl enable --now NetworkManager
+
+- name: Pacman Mirrors | pacman
+  tags:
+    - packages
+  become: true
+  pacman:
+    name: "{{ pacman_mirror }}"
+
+- name: Pacman Mirrors | shell
+  become: true
+  shell: |
+    iso=$(curl -4 ifconfig.co/country-iso)
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+    reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
+
+- name: CPU | shell
+  become: true
+  shell: |
+    nc=$(grep -c ^processor /proc/cpuinfo)
+    echo "Changing the makeflags for "$nc" cores."
+    sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$nc"/g' /etc/makepkg.conf
+    echo "Changing the compression settings for "$nc" cores."
+    sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T $nc -z -)/g' /etc/makepkg.conf
+  
+- name: Language and locale | shell
+  become: true
+  shell: |
+    sed -i 's/^#{{ lang }} {{ encoding }}/{{ lang }} {{ encoding }}/' /etc/locale.gen
+    locale-gen
+    timedatectl --no-ask-password set-timezone {{ timezone }}
+    timedatectl --no-ask-password set-ntp 1
+    localectl --no-ask-password set-locale LANG="{{ lang }}" LC_TIME="{{ lang }}"
+    ln -s /usr/share/zoneinfo/{{ timezone }} /etc/localtime
+    # wclock --systohc --utc
+  when: 0 > 1
+
+- name: Keymap | shell
+  become: true
+  shell: |
+    localectl --no-ask-password set-keymap {{ keymap }}
+
+- name: Pacman parallel downloads | shell
+  become: true
+  shell: |
+    sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+    sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+
+- name: Enable chaotic-aur | shell
+  become: true
+  shell: |
+    sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key FBA220DFC880C036
+    sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' --noconfirm
+    # echo "[chaotic-aur]
+    # Include = /etc/pacman.d/chaotic-mirrorlist" >>/etc/pacman.conf
+    # sleep 3 # making sure the file actually got changed, without can be buggy some times for some reason
+
+- name: Add chaotic-aur to pacman.conf | blockinfile
+  become: true
+  blockinfile:
+    dest: /etc/pacman.conf
+    insertafter: '^(.*)#ANSIBLE(.*)$'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      [chaotic-aur]
+      Include = /etc/pacman.d/chaotic-mirrorlist
+
+- name: Update keyring | pacman
+  become: true
+  pacman:
+    name: "archlinux-keyring"
+
+- name: Update pacman | pacman
+  become: true
+  pacman: 
+    upgrade: true
+    update_cache: true
+
+- name: Install base_pkgs | pacman
+  tags:
+    - packages
+  become: true
+  pacman:
+    name: "{{ base_pkgs }}"
+
+- name: Determine CPU | shell
+  tags: CPU
+  shell: |
+    lscpu | awk '/Vendor ID:/ {print $3}'
+  register: cpu_type
+
+- name: Print CPU type | debug
+  tags: CPU
+  debug:
+    msg: |
+      CPU Type: {{ cpu_type }}
+
+- name: Install Intel microcode | pacman
+  tags: CPU
+  become: true
+  pacman:
+    name: intel-ucode
+  when: cpu_type.stdout == "GenuineIntel"
+
+- name: Install AMD microcode | pacman
+  tags: CPU
+  become: true
+  pacman:
+    name: amd-ucode
+  when: cpu_type.stdout == "AuthenticAMD"
