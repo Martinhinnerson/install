@@ -1,8 +1,12 @@
 i3_packages:
-    - i3-wm
-    - i3status
-    - dmenu
     - feh
+    - nitrogen
+    - polybar
+    
+i3_terminal: alacritty
+i3_program_launcher: dmenu_run
+
+enable_picom: '#' # '#' to disable, '' to enable
 
 i3_packages_state: present
 i3_conf_template: i3/config

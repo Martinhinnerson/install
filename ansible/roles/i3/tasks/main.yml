@@ -2,43 +2,65 @@
   include_vars: main.yml
 
 - name: Install packages | pacman
+  tags:
+    - packages
   become: true
   pacman:
     name: "{{ i3_packages }}"
     state: "{{ i3_packages_state | default('present') }}"
-  tags:
-    - install
 
-- name: Configure Monitor | replace
-  replace:
-    path: ~/.config/i3/config
-    regexp: '(\s+)tray_output primary(\s+.*)?$'
-    replace: "\n    tray_output {{ i3_screen_output }}\n" #TODO: Fix this
+# - name: Configure Monitor | replace
+#   replace:
+#     path: ~/.config/i3/config
+#     regexp: '(\s+)tray_output primary(\s+.*)?$'
+#     replace: "\n    tray_output {{ i3_screen_output }}\n" #TODO: Fix this
+  
+- name: Set i3 terminal | blockinfile
+  blockinfile:
+    dest: ~/.config/i3/config
+    insertafter: '^(.*)#ANSIBLE(.*)$'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - TERMINAL"
+    block: |
+      # start a terminal
+      bindsym $mod+Return exec alacritty
+  
+- name: Set i3 program launcher | blockinfile
+  blockinfile:
+    dest: ~/.config/i3/config
+    insertafter: '^(.*)#ANSIBLE(.*)$'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - PROGRAM LAUNCHER"
+    block: |
+      # start dmenu (a program launcher)
+      bindsym $mod+d exec --no-startup-id dmenu_run
+      # A more modern dmenu replacement is rofi:
+      # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+      # There also is i3-dmenu-desktop which only displays applications shipping a
+      # .desktop file. It is a wrapper around dmenu, so you need that installed.
+      # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 - name: Enable picom | blockinfile
   blockinfile:
     dest: ~/.config/i3/config
     insertafter: '^(.*)#ANSIBLE(.*)$'
-    marker: "# {mark} ANSIBLE MANAGED BLOCK PICOM"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - PICOM"
     block: |
       # Run Picom at startup
-      exec --no-startup-id picom --config ~/.config/picom.conf/picom.conf
+      {{ enable_picom }}exec --no-startup-id picom --config ~/.config/picom.conf/picom.conf
 
 - name: Enable nitrogen | blockinfile
   blockinfile:
     dest: ~/.config/i3/config
     insertbefore: '^(.*)#ANSIBLE(.*)$'
-    marker: "# {mark} ANSIBLE MANAGED BLOCK NITROGEN"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - NITROGEN"
     block: |
       # Run Nitrogen at startup
       exec --no-startup-id nitrogen --restore
 
-- block:
-  - name: Fetch wallpapers
-    git:
-      repo: "{{ i3_wallpaper }}"
-      dest: ~/Pictures/i3_wallpapers
-    when: install_wallpaper | bool
+- name: Fetch wallpapers | git
+  git:
+    repo: "{{ i3_wallpaper }}"
+    dest: ~/Pictures/i3_wallpapers
+  when: install_wallpaper | bool
 
 - include: polybar.yml
   when: install_polybar | bool

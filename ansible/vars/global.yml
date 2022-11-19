@@ -11,8 +11,8 @@ i3lock_blur_times: 3 # number of times box blur is applied
 
 # What to install
 install_wallpaper: true
-install_polybar: true
-install_i3lock: true
+install_polybar: false
+install_i3lock: false
 install_dotfiles: true
 
 # Install gaming stuff
