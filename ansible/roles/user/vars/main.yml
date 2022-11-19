@@ -24,7 +24,7 @@ user_pkgs:
   - which
   - fzf
   - bat
-  - fd-find
+  - fd
   
  
 # Directory where LightDM config is located

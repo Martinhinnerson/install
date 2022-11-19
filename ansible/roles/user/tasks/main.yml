@@ -6,7 +6,6 @@
   file: 
     name: ${HOME}/bin
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -15,7 +14,6 @@
   file: 
     name: ${HOME}/Downloads
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -24,7 +22,6 @@
   file: 
     name: ${HOME}/Templates
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -33,7 +30,6 @@
   file: 
     name: ${HOME}/Public
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -42,7 +38,6 @@
   file: 
     name: ${HOME}/Downloads
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -51,7 +46,6 @@
   file: 
     name: ${HOME}/Music
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -60,7 +54,6 @@
   file: 
     name: ${HOME}/Pictures
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -69,7 +62,6 @@
   file: 
     name: ${HOME}/Videos
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -101,7 +93,6 @@
   file: 
     name: ${HOME}/.local
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -110,7 +101,6 @@
   file: 
     name: ${HOME}/.local/share
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
@@ -119,7 +109,6 @@
   file: 
     name: ${HOME}/.local/share/fonts
     state: directory
-    owner: "{{ username }}"
     group: users
     mode: 0755
 
