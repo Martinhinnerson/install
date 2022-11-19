@@ -2,3 +2,4 @@ python_packages:
   - grip
   - pywal
   - prettier
+  - pynvim

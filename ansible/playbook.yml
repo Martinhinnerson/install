@@ -5,8 +5,8 @@
     - {role: user, tags: user}
     - {role: gaming, tags: gaming}
     - {role: zsh, tags: zsh}
+    - {role: python, tags: python}
     # - role: i3
-    # - role: python
     # - role: node
     # - role: rust
     # - role: lua

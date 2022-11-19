@@ -25,6 +25,8 @@ user_pkgs:
   - fzf
   - bat
   - fd
+  - xsel
+  - neovim
   
  
 # Directory where LightDM config is located
