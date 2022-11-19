@@ -4,4 +4,4 @@
 	ignore = dirty
 [submodule "dotfiles"]
 	path = dotfiles
-	url = git@github.com:Martinhinnerson/dotfiles.git
+	url = https://github.com/Martinhinnerson/dotfiles.git
