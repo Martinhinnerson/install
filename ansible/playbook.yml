@@ -3,8 +3,8 @@
   roles:
     - {role: base, tags: base}
     - {role: user, tags: user}
-    # - role: utils
-    # - role: zsh
+    - {role: gaming, tags: gaming}
+    - {role: zsh, tags: zsh}
     # - role: i3
     # - role: python
     # - role: node

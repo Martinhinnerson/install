@@ -1,9 +1,5 @@
 # Global configuration for complete installation playbook
 
-# Set the username of your user
-username: marre
-create_user: false # Create the user
-
 # Configure of primary screen
 i3_screen_output: Virtual1
 i3_screen_resolution: 1920x1080
@@ -18,3 +14,6 @@ install_wallpaper: true
 install_polybar: true
 install_i3lock: true
 install_dotfiles: true
+
+# Install gaming stuff
+install_gaming: false

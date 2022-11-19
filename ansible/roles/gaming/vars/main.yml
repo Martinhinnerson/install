@@ -1,0 +1,8 @@
+gaming_pkgs:
+  - gamemode
+  - auto-cpufreq
+  - vkBasalt
+  - goverlay
+  - earlyoom
+  - ananicy-git
+  - libva-vdpau-driver
