@@ -4,27 +4,16 @@
     name: polybar
     state: present
 
-- name: Create dir for config | file
-  file:
-    path: ~/.config/polybar
-    state: directory
-    mode: '0755'
-
-- name: Checkout polybar theme | git
-  git:
-    repo: "{{ git_polybar }}"
-    dest: /tmp/polybar-themes
-
-- name: Copy theme to config | shell
-  shell:
-    cmd: /tmp/polybar-themes/setup.sh sim && touch ~/.config/i3/.polybarconfiginstalled
-    creates: ~/.config/i3/.polybarconfiginstalled
-
+- name: Sync polybar config | synchronize
+  synchronize:
+    src: templates/polybar
+    dest: ~/.config
+    
 - name: Enable polybar in i3 | blockinfile
   blockinfile:
     dest: ~/.config/i3/config
     insertafter: '^(.*)#ANSIBLE(.*)$'
     marker: "# {mark} ANSIBLE MANAGED BLOCK POLYBAR"
     block: |
-      exec --no-startup-id ~/.config/polybar/launch.sh --hack #polybarstartup DO NOT REMOVE COMMENT
+      exec --no-startup-id ~/.config/polybar/launch.sh
   

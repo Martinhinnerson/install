@@ -122,40 +122,13 @@
     fc-cache
     sleep 3
 
-- name: Install lightdm theme | pacman
-  tags:
-    - lightdm
-  become: true
-  pacman:
-    name:
-      - lightdm
-      - lightdm-pantheon-greeter
-    state: present
-
-- name: Backup LightDM configuration | shell
-  tags:
-    - lightdm
-  become: true
-  shell: |
-    cp {{ lightdm_conf_directory }}/{{ lightdm_overide_filename }} {{ lightdm_conf_directory }}/{{ lightdm_overide_filename }}.bak
-
-- name: Write LightDM configuration | template
-  tags:
-    - lightdm
-  become: true
-  template:
-    src: lightdm.conf
-    dest: '{{ lightdm_conf_directory }}/{{ lightdm_overide_filename }}'
-    owner: root
-    group: root
-    mode: 'u=rw,go=r'
-  register: lightdm_config
+- include: lightdm.yml
+  when: install_lightdm | bool
 
 - name: Enable essential services | shell
   become: true
   shell: |
     sudo ntpd -qg
-    sudo systemctl enable lightdm
     sudo systemctl enable ntpd.service
     sudo systemctl disable dhcpcd.service
     sudo systemctl stop dhcpcd.service

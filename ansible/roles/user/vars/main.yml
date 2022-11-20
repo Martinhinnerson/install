@@ -1,20 +1,19 @@
 user_pkgs:
-  - autojump               # zsh autojump
   - awesome-terminal-fonts # font
-  - dxvk-bin               # DXVK DirectX to Vulcan
-  - haruna-git             # video player
-  - mat2                   # metadata remover tool
-  - netdiscover            # utility for scanning local network
+    #- dxvk-bin               # DXVK DirectX to Vulcan
+    #- haruna-git             # video player
+    #- mat2                   # metadata remover tool
+    #- netdiscover            # utility for scanning local network
   - noto-fonts-emoji       # font
-  - paru				           # Like yay but coded in rust, I like it more, but for stability sake I use yay to install system
+    #- paru				           # Like yay but coded in rust, I like it more, but for stability sake I use yay to install system
   - polybar                # fast, easy to use tool for creating status bars
   - picom                  # xorg compositor (picom with rounded corners support and some fixes)
   - ttf-droid              # font
   - ttf-hack               # font
   - ttf-iosevka-nerd       # nerd font for polybar
-  - ttf-meslo              # Nerdfont package
-  - ttf-ms-fonts           # fonts
-  - ttf-roboto             # font
+    #- ttf-meslo              # Nerdfont package
+    #- ttf-ms-fonts           # fonts
+    #- ttf-roboto             # font
   - lazygit
   - ripgrep
   - iotop
@@ -27,12 +26,17 @@ user_pkgs:
   - fd
   - xsel
   - neovim
+  - chromium
   
  
+# Install lightdm
+install_lightdm: true
 # Directory where LightDM config is located
 lightdm_conf_directory: /etc/lightdm
 # Name of override file for LightDM config
 lightdm_overide_filename: lightdm.conf
+# Greeter config file
+lightdm_greeter_config: lightdm-webkit2-greeter.conf
 # Username of user to auto-login on startup
 lightdm_autologin_user:
 # Time to wait (in seconds) before the user is auto logged in to allow a chance

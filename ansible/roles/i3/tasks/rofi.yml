@@ -1,0 +1,18 @@
+- name: Install polybar | pacman
+  become: true
+  pacman:
+    name: rofi
+    state: present
+
+- name: Sync rofi config | synchronize
+  synchronize:
+    src: templates/rofi
+    dest: ~/.config
+
+- name: Set rofi as program launcher | blockinfile
+  blockinfile:
+    dest: ~/.config/i3/config
+    insertafter: '^(.*)#ANSIBLE(.*)$'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - PROGRAM LAUNCHER"
+    block: |
+      bindsym $mod+d exec --no-startup-id \"rofi -modi drun,combi,ssh -combi-modi drun,run,ssh -show combi -show run -lines 4 -eh 1 -width 30 -padding 20 -opacity '75' -bw 0 -bc '#3f3f3f' -bg '#282a33' -fg '#787878' -hlbg '#282a33' -hlfg '#9575cd'\"

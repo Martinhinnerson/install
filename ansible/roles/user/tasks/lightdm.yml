@@ -1,0 +1,58 @@
+- name: Install lightdm | pacman
+  tags: lightdm
+  become: true
+  pacman:
+    name:
+      - lightdm
+      - lightdm-pantheon-greeter
+      - lightdm-webkit2-greeter
+    state: present
+
+- name: Install lightdm theme | shell
+  tags: lightdm
+  become: true
+  shell: |
+    cd $HOME/Downloads/
+    wget git.io/webkit2 -O theme.tar.gz
+    mkdir glorious
+    mv theme.tar.gz glorious/
+    cd glorious
+    tar zxvf theme.tar.gz
+    rm theme.tar.gz
+    cd ..
+    sudo rm -rf /usr/share/lightdm-webkit/themes/glorious
+    sudo mv glorious/ /usr/share/lightdm-webkit/themes/
+
+- name: Backup lightdm configuration | shell
+  tags: lightdm
+  become: true
+  shell: |
+    cp {{ lightdm_conf_directory }}/{{ lightdm_overide_filename }} {{ lightdm_conf_directory }}/{{ lightdm_overide_filename }}.bak
+
+- name: Write lightdm greeter configuration | template
+  tags: lightdm
+  become: true
+  template:
+    src: lightdm/{{ lightdm_greeter_config }}
+    dest: '{{ lightdm_conf_directory }}'
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  register: lightdm_greeter_config
+
+- name: Write lightdm configuration | template
+  tags: lightdm
+  become: true
+  template:
+    src: lightdm.conf
+    dest: '{{ lightdm_conf_directory }}/{{ lightdm_overide_filename }}'
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  register: lightdm_config
+
+- name: Enable essential services | shell
+  tags: lightdm
+  become: true
+  shell: |
+    sudo systemctl enable lightdm

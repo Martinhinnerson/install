@@ -4,7 +4,7 @@ i3_packages:
     - polybar
     
 i3_terminal: alacritty
-i3_program_launcher: dmenu_run
+i3_program_launcher: rofi #dmenu, rofi
 
 enable_picom: '#' # '#' to disable, '' to enable
 
