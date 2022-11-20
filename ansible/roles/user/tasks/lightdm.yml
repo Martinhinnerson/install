@@ -4,7 +4,6 @@
   pacman:
     name:
       - lightdm
-      - lightdm-pantheon-greeter
       - lightdm-webkit2-greeter
     state: present
 
@@ -23,33 +22,25 @@
     sudo rm -rf /usr/share/lightdm-webkit/themes/glorious
     sudo mv glorious/ /usr/share/lightdm-webkit/themes/
 
-- name: Backup lightdm configuration | shell
-  tags: lightdm
-  become: true
-  shell: |
-    cp {{ lightdm_conf_directory }}/{{ lightdm_overide_filename }} {{ lightdm_conf_directory }}/{{ lightdm_overide_filename }}.bak
-
 - name: Write lightdm greeter configuration | template
   tags: lightdm
   become: true
   template:
-    src: lightdm/{{ lightdm_greeter_config }}
-    dest: '{{ lightdm_conf_directory }}'
+    src: lightdm/{{ lightdm_greeter_session }}.conf
+    dest: /etc/lightdm
     owner: root
     group: root
     mode: 'u=rw,go=r'
-  register: lightdm_greeter_config
 
 - name: Write lightdm configuration | template
   tags: lightdm
   become: true
   template:
-    src: lightdm.conf
-    dest: '{{ lightdm_conf_directory }}/{{ lightdm_overide_filename }}'
+    src: lightdm/lightdm.conf
+    dest: /etc/lightdm
     owner: root
     group: root
     mode: 'u=rw,go=r'
-  register: lightdm_config
 
 - name: Enable essential services | shell
   tags: lightdm

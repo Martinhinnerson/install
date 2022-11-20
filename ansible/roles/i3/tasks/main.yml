@@ -65,6 +65,12 @@
     dest: ~/Pictures/i3_wallpapers
   when: install_wallpaper | bool
 
+- name: Install background | shell
+  shell: |
+    cp $HOME/ArchObscurely/background.jpg $HOME/Pictures/background.jpg
+    sudo ln -s "$HOME/Pictures/background.jpg" /usr/share/backgrounds/background.jpg
+  ignore_errors: true
+
 - include: polybar.yml
   when: install_polybar | bool
 

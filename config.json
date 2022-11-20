@@ -1,0 +1,55 @@
+{
+    "HSM": null,
+    "__separator__": null,
+    "additional-repositories": [],
+    "archinstall-language": "English",
+    "audio": "pipewire",
+    "bootloader": "grub-install",
+    "config_version": "2.5.1",
+    "debug": false,
+    "desktop-environment": "i3",
+    "gfx_driver": "All open-source (default)",
+    "harddrives": [
+        "/dev/nvme1n1"
+    ],
+    "hostname": "archlinux",
+    "kernels": [
+        "linux"
+    ],
+    "keyboard-layout": "us",
+    "mirror-region": {
+        "Sweden": {
+            "http://ftp.acc.umu.se/mirror/archlinux/$repo/os/$arch": true,
+            "http://ftp.myrveln.se/pub/linux/archlinux/$repo/os/$arch": true,
+            "http://ftpmirror.infania.net/mirror/archlinux/$repo/os/$arch": true,
+            "https://ftp.acc.umu.se/mirror/archlinux/$repo/os/$arch": true,
+            "https://ftp.ludd.ltu.se/mirrors/archlinux/$repo/os/$arch": true,
+            "https://ftp.myrveln.se/pub/linux/archlinux/$repo/os/$arch": true,
+            "https://mirror.osbeck.com/archlinux/$repo/os/$arch": true
+        }
+    },
+    "nic": {
+        "dhcp": true,
+        "dns": null,
+        "gateway": null,
+        "iface": null,
+        "ip": null,
+        "type": "iso"
+    },
+    "no_pkg_lookups": false,
+    "ntp": true,
+    "offline": false,
+    "packages": [],
+    "parallel downloads": 0,
+    "profile": {
+        "path": "/usr/lib/python3.10/site-packages/archinstall/profiles/desktop.py"
+    },
+    "save_config": null,
+    "script": "guided",
+    "silent": false,
+    "swap": true,
+    "sys-encoding": "UTF-8",
+    "sys-language": "en_US",
+    "timezone": "UTC",
+    "version": "2.5.1"
+}
